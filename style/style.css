@@ -1,0 +1,268 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #222;
+  overflow: hidden;
+}
+
+.pitch {
+  width: 1000px;
+  height: 600px;
+  background-color: rgb(78, 190, 74);
+  background-image: url("../img/goal.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  user-select: none;
+}
+
+.goal-keeper {
+  width: 210px;
+  position: absolute;
+  bottom: 70px;
+  left: calc(50% - 105px);
+  pointer-events: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.ball {
+  width: 50px;
+  position: absolute;
+  bottom: 15px;
+  left: calc(50% - 25px);
+  pointer-events: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.foot {
+  position: absolute;
+  background-image: url("../img/foot.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  z-index: 100;
+  width: 70px;
+  height: 70px;
+  pointer-events: none;
+  display: none;
+  transition: transform 0.1s ease-in-out;
+  transform: rotate(0);
+}
+
+.score_wrapper {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 40px;
+  z-index: 501;
+}
+.score {
+  color: #f12d0b;
+  z-index: 501;
+}
+
+.pcScore {
+  color: #4cd174;
+}
+
+.modal {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 14, 14, 0.384);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  transition: oppacity 0.2s ease;
+}
+
+.modalBtnsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contBtn {
+  width: 310px;
+  border: none;
+  background-color: rgb(60, 91, 231);
+  color: #fff;
+  font-size: 35px;
+  padding: 10px 40px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 20px;
+}
+
+.playAgain {
+  width: 310px;
+  border: none;
+  background-color: rgb(60, 91, 231);
+  color: #fff;
+  font-size: 35px;
+  padding: 10px 40px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: none;
+  margin-right: 20px;
+}
+
+.quitGame {
+  width: 310px;
+  border: none;
+  background-color: rgb(60, 91, 231);
+  color: #fff;
+  font-size: 35px;
+  padding: 10px 40px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contBtn:hover,
+.quitGame:hover,
+.playAgain:hover {
+  background-color: rgba(33, 70, 236, 0.993);
+}
+
+.contBtn:active .quitGame:hover {
+  transform: translateY(2px);
+}
+
+.win,
+.loose {
+  padding: 20px 50px;
+  color: #fff;
+  font-size: 40px;
+  border-radius: 30px;
+  margin-top: 90px;
+  margin-bottom: 300px;
+  display: none;
+}
+
+.win {
+  background-color: rgb(76, 209, 116);
+}
+.loose {
+  background-color: rgb(233, 16, 16);
+}
+
+.startDisplay {
+  width: 100vw;
+  height: 100vh;
+  background-color: #222;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 900;
+  background-image: url("../img/slideShowImgs/img-1.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.startDisplay::before {
+  content: "";
+  position: absolute;
+  background-color: rgba(34, 34, 34, 0.123);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 901;
+}
+
+.startDisplayBtnsWrapper {
+  z-index: 950;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: rgba(20, 19, 19, 0.658);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.startGameBtn,
+.exitGameBtn {
+  border: none;
+  background-color: rgba(39, 35, 35, 0.89);
+  color: yellow;
+  font-size: 25px;
+  border-radius: 20px;
+  padding: 20px 50px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.startGameBtn:active,
+.exitGameBtn:active {
+  transform: translateY(5px);
+}
+
+.startGameBtn {
+  margin-right: 20px;
+}
+
+.startGameBtn:hover,
+.exitGameBtn:hover,
+.enterBtn:hover {
+  background-color: rgb(76, 209, 116);
+  color: #222;
+}
+
+.enterGame {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-image: url("../img/uefa__img.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  z-index: 950;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.enterGame::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(24, 16, 16, 0.575);
+}
+
+.enterBtn {
+  margin-top: 250px;
+  border: none;
+  background-color: rgb(39, 35, 35);
+  color: yellow;
+  font-size: 25px;
+  border-radius: 20px;
+  padding: 20px 50px;
+  z-index: 960;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.enterBtn:active {
+  transform: translateY(5px);
+}
