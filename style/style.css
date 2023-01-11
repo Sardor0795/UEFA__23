@@ -28,7 +28,8 @@ body {
 }
 
 .ball {
-  width: 50px;
+  width: 45px;
+  height: 45px;
   position: absolute;
   bottom: 15px;
   left: calc(50% - 25px);
@@ -61,6 +62,7 @@ body {
   font-size: 40px;
   z-index: 501;
 }
+
 .score {
   color: #f12d0b;
   z-index: 501;
@@ -154,6 +156,7 @@ body {
 .win {
   background-color: rgb(76, 209, 116);
 }
+
 .loose {
   background-color: rgb(233, 16, 16);
 }
