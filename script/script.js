@@ -69,6 +69,8 @@ function playAgain() {
   pcScore.innerHTML = "0";
   pcScore.style.color = "#4cd174";
   win.style.display = "none";
+  loose.innerHTML = "NOOOO !!!";
+  win.innerHTML = "GOOOOOL";
   loose.style.display = "none";
   ball.style.cssText = `
   bottom: 10px;
@@ -283,6 +285,8 @@ const quitGame = () => {
   gameOver.load();
   goalSave.load();
   goalSound.load();
+  loose.innerHTML = "NOOOO !!!";
+  win.innerHTML = "GOOOOOL";
   constBtn.innerHTML = "Start Game";
   scoreDisplay.innerHTML = "0";
   scoreDisplay.style.color = "#f12d0b";
