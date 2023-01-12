@@ -4,6 +4,7 @@ let ball = document.querySelector(".ball");
 const goalKeeper = document.querySelector(".goal-keeper");
 
 let modal = document.querySelector(".modal");
+let modalBtnsWrapper = document.querySelector(".modalBtnsWrapper");
 let win = document.querySelector(".win");
 let loose = document.querySelector(".loose");
 let scoreDisplay = document.querySelector(".score");
@@ -302,6 +303,7 @@ pitch.addEventListener("click", (e) => {
 });
 
 const continueGame = () => {
+  modalBtnsWrapper.style.marginTop = "0";
   stadiumSound.play();
   ball.style.cssText = `
   bottom: 10px;
@@ -349,6 +351,7 @@ const exitGame = () => {
 const startGame = () => {
   startDisplay.style.display = "none";
   uefaAudio.load();
+  modalBtnsWrapper.style.marginTop = "300px";
 };
 
 const quitGame = () => {
