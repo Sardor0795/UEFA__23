@@ -68,6 +68,7 @@ function looseFunc() {
 }
 
 function playAgain() {
+  antiDdosAttac = true;
   gameOver.load();
   goalSave.load();
   goalSound.load();
@@ -136,6 +137,8 @@ pitch.addEventListener("mouseup", (e) => {
     `;
 });
 
+let antiDdosAttac = true;
+
 pitch.addEventListener("click", (e) => {
   foot.style.transform.rotate = "0deg";
 
@@ -149,51 +152,54 @@ pitch.addEventListener("click", (e) => {
     e.offsetY <= 570
   ) {
     if (e.offsetY > 562) {
-      stadiumSound.load();
-      ballSound.play();
-      let outNum = parseInt(Math.random() * 5);
+      if (antiDdosAttac) {
+        stadiumSound.load();
+        ballSound.play();
+        let outNum = parseInt(Math.random() * 5);
 
-      ball.style.cssText = `
+        ball.style.cssText = `
       bottom: ${outPath[outNum + 1].b}px;
       left: ${outPath[outNum + 1].l}px;
       width: 30px;
       height: 30px;
     `;
 
-      goalKeeper.style.cssText = `
+        goalKeeper.style.cssText = `
       bottom: ${goalPath[randNumGoal + 1].b}px;
       left: ${goalPath[randNumGoal + 1].l}px;
       transform: rotate(${goalPath[randNumGoal + 1].r}deg);
     `;
-      setTimeout(() => {
-        goalPostHit.play();
-      }, 300);
+        setTimeout(() => {
+          goalPostHit.play();
+        }, 300);
 
-      pc += 1;
-      gameCount += 1;
+        pc += 1;
+        gameCount += 1;
 
-      pcScore.innerHTML = pc;
-      pcScore.style.color = "#f12d0b";
-      loose.style.display = "block";
-      loose.innerHTML = "OUT !!!";
+        pcScore.innerHTML = pc;
+        pcScore.style.color = "#f12d0b";
+        loose.style.display = "block";
+        loose.innerHTML = "OUT !!!";
 
-      if (gameCount >= 5 && score > pc) {
-        loose.style.display = "none";
-        winFunc();
-      } else if (gameCount >= 5 && score < pc) {
-        looseFunc();
+        if (gameCount >= 5 && score > pc) {
+          loose.style.display = "none";
+          winFunc();
+        } else if (gameCount >= 5 && score < pc) {
+          looseFunc();
+        }
+
+        setTimeout(() => {
+          antiDdosAttac = true;
+          modal.style.display = "flex";
+          modal.style.oppacity = "1";
+          modal.style.pointerEvents = "all";
+          modal.style.zIndex = "500";
+          constBtn.innerHTML = "Continue";
+          foot.style.height = "0";
+          foot.style.width = "0";
+        }, 500);
       }
-
-      setTimeout(() => {
-        modal.style.display = "flex";
-        modal.style.oppacity = "1";
-        modal.style.pointerEvents = "all";
-        modal.style.zIndex = "500";
-        constBtn.innerHTML = "Continue";
-        foot.style.height = "0";
-        foot.style.width = "0";
-      }, 500);
-
+      antiDdosAttac = false;
       return false;
     } else if (e.offsetX <= 470 && e.offsetY <= 540) {
       randNumBall = 8;
@@ -215,94 +221,101 @@ pitch.addEventListener("click", (e) => {
       randNumBall = 0;
     }
 
-    ballSound.play();
+    if (antiDdosAttac) {
+      ballSound.play();
 
-    ball.style.cssText = `
+      ball.style.cssText = `
       bottom: ${ballPath[randNumBall + 1].b}px;
       left: ${ballPath[randNumBall + 1].l}px;
       width: 30px;
       height: 30px;
     `;
 
-    goalKeeper.style.cssText = `
+      goalKeeper.style.cssText = `
       bottom: ${goalPath[randNumGoal + 1].b}px;
       left: ${goalPath[randNumGoal + 1].l}px;
       transform: rotate(${goalPath[randNumGoal + 1].r}deg);
     `;
 
-    if (randNumBall + 1 !== randNumGoal + 1) {
-      if (randNumGoal + 1 == 4 && randNumBall + 1 == 5) {
+      if (randNumBall + 1 !== randNumGoal + 1) {
+        if (randNumGoal + 1 == 4 && randNumBall + 1 == 5) {
+          setTimeout(() => {
+            goalSave.play();
+          }, 300);
+          win.style.display = "none";
+          loose.style.display = "block";
+          gameCount += 1;
+          pc += 1;
+          pcScore.innerHTML = pc;
+          pcScore.style.color = "#f12d0b";
+          setTimeout(() => {
+            antiDdosAttac = true;
+            modal.style.display = "flex";
+            modal.style.oppacity = "1";
+            modal.style.pointerEvents = "all";
+            modal.style.zIndex = "500";
+            constBtn.innerHTML = "Continue";
+            constBtn.style.display = "block";
+            quitGameBtn.style.display = "block";
+            foot.style.height = "0";
+            foot.style.width = "0";
+          }, 500);
+          if (gameCount >= 5) {
+            setTimeout(() => {
+              constBtn.style.display = "none";
+            }, 501);
+            if (score > pc) {
+              winFunc();
+            } else {
+              looseFunc();
+            }
+          }
+          antiDdosAttac = false;
+          return false;
+        }
+        stadiumSound.load();
+        goalSound.play();
+        score += 1;
+        gameCount += 1;
+        scoreDisplay.innerHTML = score;
+        if (score > 0) {
+          scoreDisplay.style.color = "#4cd174";
+        }
+        win.style.display = "block";
+        if (gameCount >= 5 && score > pc) {
+          winFunc();
+        }
+      } else {
+        if (gameCount >= 4 && score < pc) {
+          looseFunc();
+        }
         setTimeout(() => {
           goalSave.play();
         }, 300);
-        win.style.display = "none";
         loose.style.display = "block";
         gameCount += 1;
         pc += 1;
         pcScore.innerHTML = pc;
         pcScore.style.color = "#f12d0b";
-        setTimeout(() => {
-          modal.style.display = "flex";
-          modal.style.oppacity = "1";
-          modal.style.pointerEvents = "all";
-          modal.style.zIndex = "500";
-          constBtn.innerHTML = "Continue";
-          constBtn.style.display = "block";
-          quitGameBtn.style.display = "block";
-          foot.style.height = "0";
-          foot.style.width = "0";
-        }, 500);
-        if (gameCount >= 5) {
-          setTimeout(() => {
-            constBtn.style.display = "none";
-          }, 501);
-          if (score > pc) {
-            winFunc();
-          } else {
-            looseFunc();
-          }
-        }
-        return false;
       }
-      stadiumSound.load();
-      goalSound.play();
-      score += 1;
-      gameCount += 1;
-      scoreDisplay.innerHTML = score;
-      if (score > 0) {
-        scoreDisplay.style.color = "#4cd174";
-      }
-      win.style.display = "block";
-      if (gameCount >= 5 && score > pc) {
-        winFunc();
-      }
-    } else {
-      if (gameCount >= 4 && score < pc) {
-        looseFunc();
-      }
-      setTimeout(() => {
-        goalSave.play();
-      }, 300);
-      loose.style.display = "block";
-      gameCount += 1;
-      pc += 1;
-      pcScore.innerHTML = pc;
-      pcScore.style.color = "#f12d0b";
-    }
 
-    setTimeout(() => {
-      modal.style.display = "flex";
-      modal.style.oppacity = "1";
-      modal.style.pointerEvents = "all";
-      modal.style.zIndex = "500";
-      constBtn.innerHTML = "Continue";
-      foot.style.height = "0";
-      foot.style.width = "0";
-    }, 500);
+      setTimeout(() => {
+        antiDdosAttac = true;
+        modal.style.display = "flex";
+        modal.style.oppacity = "1";
+        modal.style.pointerEvents = "all";
+        modal.style.zIndex = "500";
+        constBtn.innerHTML = "Continue";
+        foot.style.height = "0";
+        foot.style.width = "0";
+      }, 500);
+    }
+    antiDdosAttac = false;
   }
 });
 
 const continueGame = () => {
+  antiDdosAttac = true;
   modalBtnsWrapper.style.marginTop = "0";
   stadiumSound.play();
   ball.style.cssText = `
@@ -349,12 +362,14 @@ const exitGame = () => {
 };
 
 const startGame = () => {
+  antiDdosAttac = true;
   startDisplay.style.display = "none";
   uefaAudio.load();
   modalBtnsWrapper.style.marginTop = "300px";
 };
 
 const quitGame = () => {
+  antiDdosAttac = true;
   playGameAgainBtn.style.display = "none";
   constBtn.style.display = "block";
   startDisplay.style.display = "flex";

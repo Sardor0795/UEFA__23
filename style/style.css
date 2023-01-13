@@ -75,7 +75,7 @@ body {
 .modal {
   width: 100vw;
   height: 100vh;
-  background-color: rgba(15, 14, 14, 0.588);
+  background-color: rgba(16, 15, 15, 0.588);
   position: fixed;
   top: 0;
   left: 0;
@@ -104,7 +104,7 @@ body {
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-right: 20px;
+  margin-right: 110px;
 }
 
 .playAgain {
@@ -118,7 +118,7 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   display: none;
-  margin-right: 20px;
+  margin-right: 110px;
 }
 
 .quitGame {
