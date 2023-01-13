@@ -265,8 +265,13 @@ pitch.addEventListener("click", (e) => {
               constBtn.style.display = "none";
             }, 501);
             if (score > pc) {
+              quitGameBtn.style.display = "block";
+              playGameAgainBtn.style.display = "block";
+              loose.style.display = "none";
               winFunc();
             } else {
+              quitGameBtn.style.display = "block";
+              playGameAgainBtn.style.display = "block";
               looseFunc();
             }
           }
